@@ -12,8 +12,10 @@
     <header>
       <nav>
         <% if user_signed_in? %>
-          <%= link_to 'プロフィール変更', edit_user_registration_path %>
-          <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+          <%= link_to 'Home', root_path %>
+          <%= link_to 'Profile', show_path %>
+          <%= link_to 'Edit Profile', edit_user_registration_path %>
+          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
         <% end %>
       </nav>
     </header>
