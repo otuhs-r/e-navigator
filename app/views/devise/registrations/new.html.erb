@@ -4,8 +4,28 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= f.label :user_name %><br />
+    <%= f.text_field :user_name, autofocus: true %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :birth_day %><br />
+    <%= f.date_select :birth_day, start_year: 1988, end_year: Time.now.year, default: Date.new(1993, 1, 1) %>
+  </div>
+
+  <div class=field">
+    <%= f.label :gender %><br />
+    <%= f.select :gender, [["male", 0], ["female", 1]] %>
+  </div>
+
+  <div class="field">
+    <%= f.label :school_name %><br />
+    <%= f.text_field :school_name %>
   </div>
 
   <div class="field">
