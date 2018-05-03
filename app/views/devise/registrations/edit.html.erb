@@ -4,6 +4,11 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= f.label :user_name %><br />
+    <%= f.text_field :user_name, autofocus: true %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
@@ -11,6 +16,21 @@
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
+
+  <div class="field">
+    <%= f.label :birth_day %><br />
+    <%= f.date_select :birth_day, start_year: 1988, end_year: Time.now.year, default: Date.new(1993, 1, 1) %>
+  </div>
+
+  <div class=field">
+    <%= f.label :gender %><br />
+    <%= f.select :gender, [["male", :male], ["female", :female]] %>
+  </div>
+
+  <div class="field">
+    <%= f.label :school_name %><br />
+    <%= f.text_field :school_name %>
+  </div>
 
   <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
@@ -39,5 +59,3 @@
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
