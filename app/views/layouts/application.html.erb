@@ -3,25 +3,31 @@
   <head>
     <title>ENavigator</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
-    <header>
-      <nav>
-        <% if user_signed_in? %>
-          <%= link_to 'Home', root_path %>
-          <%= link_to 'Profile', show_path %>
-          <%= link_to 'Edit Profile', edit_user_registration_path %>
-          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
-        <% end %>
-      </nav>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <%= link_to "ENavigator", root_path, id: "logo" %>
+        <nav>
+          <% if user_signed_in? %>
+            <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to 'Home', root_path %></li>
+              <li><%= link_to 'Profile', show_path %></li>
+              <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
+              <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+            </ul>
+          <% end %>
+        </nav>
+      </div>
     </header>
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
