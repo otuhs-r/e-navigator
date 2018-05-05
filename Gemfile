@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 2.5'
 
 # See https://github.com/plataformatec/devise
 gem 'devise'
+gem 'devise-bootstrap-views'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
