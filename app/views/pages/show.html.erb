@@ -1,2 +1,32 @@
-<h1>Pages#show</h1>
-<p>Find me in app/views/pages/show.html.erb</p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Profile</h4>
+  </div>
+  <div class="panel-body">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <strong>Name: </strong>
+        <%= current_user.user_name %>
+      </li>
+      <li class="list-group-item">
+        <strong>email: </strong>
+        <%= current_user.email %>
+      </li>
+      <li class="list-group-item">
+        <strong>Birth Day: </strong>
+        <%= current_user.birth_day %>
+      </li>
+      <li class="list-group-item">
+        <strong>Gender: </strong>
+        <%= current_user.gender %>
+      </li>
+      <li class="list-group-item">
+        <strong>School Name: </strong>
+        <%= current_user.school_name %>
+      </li>
+    </ul>
+  </div>
+</div>
+<div>
+  <%= link_to 'Edit', edit_user_registration_path, class: "btn btn-primary" %>
+</div>
