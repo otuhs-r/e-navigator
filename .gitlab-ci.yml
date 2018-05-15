@@ -1,0 +1,6 @@
+production:
+  stage: deploy
+  script:
+  - gem install dpl
+  - dpl --provider=heroku --app=e-navigator-otuhs-r --api-key=$HEROKU_PRODUCTION_API_KEY
+

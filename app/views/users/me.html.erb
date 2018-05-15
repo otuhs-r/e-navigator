@@ -1,0 +1,42 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Profile</h4>
+  </div>
+  <div class="panel-body">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-lg-2"><strong>Name: </strong></div>
+          <div class="col-lg-4"><%= current_user.user_name %><div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-lg-2"><strong>email: </strong></div>
+          <div class="col-lg-4"><%= current_user.email %></div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-lg-2"><strong>Birth Day: </strong></div>
+          <div class="col-lg-4"><%= current_user.birth_day %></div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-lg-2"><strong>Gender: </strong></div>
+          <div class="col-lg-4"><%= current_user.gender %></div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-lg-2"><strong>School Name: </strong></div>
+          <div class="col-lg-4"><%= current_user.school_name %></div>
+        </div>
+      </li>
+    </ul>
+    <div>
+      <%= link_to 'Edit', edit_user_registration_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
