@@ -2,27 +2,27 @@
 
 <h1>Interviews</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Scheduled datetime</th>
-      <th>Accepted</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @interviews.each do |interview| %>
+<div class="panel panel-default">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= interview.scheduled_datetime %></td>
-        <td><%= interview.accepted %></td>
-        <td><%= link_to 'Edit', edit_user_interview_path(current_user.id, interview) %></td>
-        <td><%= link_to 'Destroy', user_interview_path(current_user.id, interview), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Datetime</th>
+        <th>Status</th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Interview', new_user_interview_path %>
+    </thead>
+    <tbody>
+      <% @interviews.each do |interview| %>
+        <tr>
+          <td><%= interview.scheduled_datetime %></td>
+          <td><%= interview.accepted %></td>
+          <td><%= link_to 'Edit', edit_user_interview_path(current_user.id, interview), class: "btn btn-primary" %></td>
+          <td><%= link_to 'Remove', user_interview_path(current_user.id, interview),
+          method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= link_to 'New Interview', new_user_interview_path, class: "btn btn-default" %>
