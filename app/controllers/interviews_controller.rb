@@ -5,7 +5,7 @@ class InterviewsController < ApplicationController
   # GET /interviews.json
   def index
     user = User.find(params[:user_id])
-    @interviews = user.interviews
+    @interviews = user.interviews.order(:scheduled_datetime)
   end
 
   # GET /interviews/1
