@@ -16,7 +16,7 @@
       <% @interviews.each do |interview| %>
         <tr>
           <td><%= interview.scheduled_datetime %></td>
-          <td><%= interview.accepted %></td>
+          <td><%= interview.status %></td>
           <td><%= link_to 'Edit', edit_user_interview_path(current_user.id, interview), class: "btn btn-primary" %></td>
           <td><%= link_to 'Remove', user_interview_path(current_user.id, interview),
           method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
