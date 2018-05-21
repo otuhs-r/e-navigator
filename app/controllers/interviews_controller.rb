@@ -1,29 +1,21 @@
 class InterviewsController < ApplicationController
   before_action :set_interview, only: [:edit, :update, :destroy]
 
-  # GET /interviews
-  # GET /interviews.json
   def index
     user = User.find(params[:user_id])
     @interviews = user.interviews.order(:scheduled_datetime)
   end
 
-  # GET /interviews/1
-  # GET /interviews/1.json
   def show
   end
 
-  # GET /interviews/new
   def new
     @interview = current_user.interviews.build
   end
 
-  # GET /interviews/1/edit
   def edit
   end
 
-  # POST /interviews
-  # POST /interviews.json
   def create
     @interview = current_user.interviews.build(interview_params)
 
@@ -36,8 +28,6 @@ class InterviewsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /interviews/1
-  # PATCH/PUT /interviews/1.json
   def update
     respond_to do |format|
       if @interview.update(interview_params)
@@ -48,8 +38,6 @@ class InterviewsController < ApplicationController
     end
   end
 
-  # DELETE /interviews/1
-  # DELETE /interviews/1.json
   def destroy
     @interview.destroy
     respond_to do |format|
