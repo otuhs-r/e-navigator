@@ -19,31 +19,24 @@ class InterviewsController < ApplicationController
   def create
     @interview = current_user.interviews.build(interview_params)
 
-    respond_to do |format|
-      if @interview.save
-        format.html { redirect_to user_interviews_path(current_user.id), notice: 'Interview was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    if @interview.save
+      redirect_to user_interviews_path(current_user.id), notice: 'Interview was successfully created.'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @interview.update(interview_params)
-        format.html { redirect_to user_interviews_path(current_user.id), notice: 'Interview was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @interview.update(interview_params)
+      redirect_to user_interviews_path(current_user.id), notice: 'Interview was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
     @interview.destroy
-    respond_to do |format|
-      format.html { redirect_to user_interviews_path(current_user.id), notice: 'Interview was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to user_interviews_path(current_user.id), notice: 'Interview was successfully destroyed.'
   end
 
   private
