@@ -3,6 +3,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
-  enum gender: { Male: 0, Female: 1 }
+  enum gender: { male: 0, female: 1 }
   has_many :interviews, dependent: :destroy
 end
