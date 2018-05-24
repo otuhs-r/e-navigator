@@ -15,6 +15,7 @@
           <% if user_signed_in? %>
             <ul class="nav navbar-nav navbar-right">
               <li><%= link_to 'Home', root_path %></li>
+              <li><%= link_to 'Interviews', user_interviews_path(current_user.id) %></li>
               <li><%= link_to 'Profile', users_me_path %></li>
               <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
             </ul>
