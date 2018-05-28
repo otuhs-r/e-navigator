@@ -11,6 +11,8 @@ class User < ApplicationRecord
   end
 
   def interview_datetime
+    accepted_interview = self.interviews.find_by(status: :accepted)
+    accepted_interview.scheduled_datetime
   end
 
   def reject_interviews_except(excepted_interview)
