@@ -12,4 +12,12 @@ class User < ApplicationRecord
 
   def interview_datetime
   end
+
+  def reject_interviews_except(excepted_interview)
+    self.interviews.each do |interview|
+      unless interview == excepted_interview
+        interview.update(status: :rejected)
+      end
+    end
+  end
 end

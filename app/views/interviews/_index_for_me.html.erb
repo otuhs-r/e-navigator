@@ -14,9 +14,10 @@
         <tr>
           <td><%= interview.scheduled_datetime %></td>
           <td><%= interview.status.capitalize %></td>
-          <td><%= link_to 'Edit', edit_user_interview_path(current_user.id, interview), class: "btn btn-primary" %></td>
+          <% button_state = interview.committed? ? "disabled" : "active" %>
+          <td><%= link_to 'Edit', edit_user_interview_path(current_user.id, interview), class: "btn btn-primary #{button_state}" %></td>
           <td><%= link_to 'Remove', user_interview_path(current_user.id, interview),
-          method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+          method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger #{button_state}" %></td>
         </tr>
       <% end %>
     </tbody>
