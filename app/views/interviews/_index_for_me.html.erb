@@ -11,7 +11,7 @@
     </thead>
     <tbody>
       <% interviews.each do |interview| %>
-        <tr>
+        <tr class=<%= interview.status == 'accepted' ? "success" : "" %>>
           <td><%= interview.scheduled_datetime %></td>
           <td><%= interview.status.capitalize %></td>
           <% button_state = interview.committed? ? "disabled" : "active" %>
