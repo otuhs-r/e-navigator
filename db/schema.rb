@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180520105102) do
+ActiveRecord::Schema.define(version: 20180529103459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20180520105102) do
     t.integer "user_id"
     t.integer "status", default: 0
     t.index ["id"], name: "index_interviews_on_id"
+    t.index ["user_id", "scheduled_datetime"], name: "index_interviews_on_user_id_and_scheduled_datetime", unique: true
     t.index ["user_id"], name: "index_interviews_on_user_id"
   end
 
