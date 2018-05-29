@@ -5,7 +5,7 @@
   <% interviews.each do |interview| %>
     <% if interview.future? %>
       <%= link_to interview.scheduled_datetime, user_interview_path(user.id, interview.id, params: { interview: { status: :accepted } }),
-      method: 'put', data: { confirm: 'Are you sure?' }, class: "list-group-item" %>
+      method: 'put', data: { confirm: "#{interview.scheduled_datetime} is selected.\nAre you sure?" }, class: "list-group-item" %>
     <% else %>
       <li class="list-group-item disabled"><%= interview.scheduled_datetime %></li>
     <% end %>
