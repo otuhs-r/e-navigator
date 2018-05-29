@@ -1,6 +1,6 @@
 <h1><%= user.user_name %>'s Interviews</h1>
 <h2>Current interview datetime: <%= user.interview_datetime ? user.interview_datetime : '-' %></h2>
-<p>Select an interview datetime.</p>
+<p><%= interviews.empty? ? "There is no proposed datetime of interview." : "Select an interview datetime."%></p>
 <div class="list-group">
   <% interviews.each do |interview| %>
     <% if interview.future? %>
