@@ -1,5 +1,6 @@
 class InterviewsController < ApplicationController
   before_action :set_interview, only: [:edit, :update, :destroy]
+  helper_method :current_user?
 
   def index
     @user = User.find(params[:user_id])
