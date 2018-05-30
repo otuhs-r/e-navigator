@@ -5,10 +5,10 @@ class InterviewsController < ApplicationController
 
   def index
     @interviews = if current_user?(@user)
-      @user.interviews.order(:scheduled_datetime)
-    else
-      @user.interviews.where(status: :pending).or(@user.interviews.where(status: :rejected)).order(:scheduled_datetime)
-    end
+                    @user.interviews.order(:scheduled_datetime)
+                  else
+                    @user.interviews.where(status: :pending).or(@user.interviews.where(status: :rejected)).order(:scheduled_datetime)
+                  end
   end
 
   def show
