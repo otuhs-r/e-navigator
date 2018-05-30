@@ -4,7 +4,7 @@ class Interview < ApplicationRecord
   validates :user_id, uniqueness: { scope: [:scheduled_datetime] }
 
   def committed?
-    self.status != 'pending'
+    !pending?
   end
 
   def future?
