@@ -8,6 +8,6 @@ class Interview < ApplicationRecord
   end
 
   def future?
-    self.scheduled_datetime.future?
+    scheduled_datetime.future?
   end
 end
