@@ -10,9 +10,8 @@ class User < ApplicationRecord
     (Date.today.to_s(:number).to_i - birth_day.to_s(:number).to_i) / 10000
   end
 
-  def interview_datetime
-    accepted_interview = interviews.find_by(status: :accepted)
-    accepted_interview.scheduled_datetime if accepted_interview
+  def accepted_interview
+    interviews.find_by(status: :accepted)
   end
 
   def reject_interviews_except(excepted_interview)

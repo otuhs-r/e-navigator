@@ -21,7 +21,7 @@
           <td><%= user.age %></td>
           <td><%= user.gender.capitalize %></td>
           <td><%= user.school_name %></td>
-          <td nowrap><%= user.interview_datetime %></td>
+          <td nowrap><%= user.accepted_interview.try(:scheduled_datetime) %></td>
           <td><%= link_to 'Show Interviews', user_interviews_path(user.id), class: "btn btn-primary" %></td>
         </tr>
       <% end %>
