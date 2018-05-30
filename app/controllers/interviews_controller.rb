@@ -1,9 +1,9 @@
 class InterviewsController < ApplicationController
   before_action :set_interview, only: [:edit, :update, :destroy]
+  before_action :set_user, only: [:index, :update]
   helper_method :current_user?
 
   def index
-    @user = User.find(params[:user_id])
     @interviews = if current_user?(@user)
       @user.interviews.order(:scheduled_datetime)
     else
@@ -32,9 +32,8 @@ class InterviewsController < ApplicationController
   end
 
   def update
-    user = User.find(params[:user_id])
-    unless current_user?(user)
-      user.reject_interviews_except(@interview)
+    unless current_user?(@user)
+      @user.reject_interviews_except(@interview)
     end
     if @interview.update(interview_params)
       redirect_to user_interviews_path(params[:user_id]), notice: 'Interview was successfully updated.'
@@ -56,6 +55,10 @@ class InterviewsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_interview
       @interview = User.find(params[:user_id]).interviews.find(params[:id])
+    end
+
+    def set_user
+      @user = User.find(params[:user_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
