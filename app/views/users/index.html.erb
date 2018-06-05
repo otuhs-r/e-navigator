@@ -1,2 +1,30 @@
-<h1>Home</h1>
-<p>Hello, world!</p>
+<h1>Users</h1>
+
+<div class="panel panel-default">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>School Name</th>
+        <th>Interview Datetime</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td nowrap><%= user.user_name %></td>
+          <td nowrap><%= user.email %></td>
+          <td><%= user.age %></td>
+          <td><%= user.gender.capitalize %></td>
+          <td><%= user.school_name %></td>
+          <td nowrap><%= user.accepted_interview.try(:scheduled_datetime) %></td>
+          <td><%= link_to 'Show Interviews', user_interviews_path(user.id), class: "btn btn-primary" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

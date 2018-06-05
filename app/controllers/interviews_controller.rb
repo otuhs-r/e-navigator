@@ -1,9 +1,14 @@
 class InterviewsController < ApplicationController
   before_action :set_interview, only: [:edit, :update, :destroy]
+  before_action :set_user, only: [:index, :update]
+  helper_method :current_user?
 
   def index
-    user = User.find(params[:user_id])
-    @interviews = user.interviews.order(:scheduled_datetime)
+    @interviews = if current_user?(@user)
+                    @user.interviews.order(:scheduled_datetime)
+                  else
+                    @user.interviews.where(status: :pending).or(@user.interviews.where(status: :rejected)).order(:scheduled_datetime)
+                  end
   end
 
   def show
@@ -27,8 +32,11 @@ class InterviewsController < ApplicationController
   end
 
   def update
+    unless current_user?(@user)
+      @user.reject_interviews_except(@interview)
+    end
     if @interview.update(interview_params)
-      redirect_to user_interviews_path(current_user.id), notice: 'Interview was successfully updated.'
+      redirect_to user_interviews_path(params[:user_id]), notice: 'Interview was successfully updated.'
     else
       render :edit
     end
@@ -39,10 +47,18 @@ class InterviewsController < ApplicationController
     redirect_to user_interviews_path(current_user.id), notice: 'Interview was successfully destroyed.'
   end
 
+  def current_user?(user)
+    current_user.id == user.id
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_interview
-      @interview = current_user.interviews.find_by(id: params[:id])
+      @interview = Interview.find(params[:id])
+    end
+
+    def set_user
+      @user = User.find(params[:user_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,0 +1,13 @@
+<h1><%= user.user_name %>'s Interviews</h1>
+<h2>Current interview datetime: <%= user.accepted_interview ? user.accepted_interview.scheduled_datetime : '-' %></h2>
+<p><%= interviews.empty? ? "There is no proposed datetime of interview." : "Select an interview datetime."%></p>
+<div class="list-group">
+  <% interviews.each do |interview| %>
+    <% if interview.future? %>
+      <%= link_to interview.scheduled_datetime, user_interview_path(user.id, interview.id, params: { interview: { status: :accepted } }),
+      method: 'put', data: { confirm: "#{interview.scheduled_datetime} is selected.\nAre you sure?" }, class: "list-group-item" %>
+    <% else %>
+      <li class="list-group-item disabled"><%= interview.scheduled_datetime %></li>
+    <% end %>
+  <% end %>
+</div>
