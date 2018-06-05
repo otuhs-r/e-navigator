@@ -37,6 +37,7 @@ class InterviewsController < ApplicationController
     end
     if @interview.update(interview_params)
       redirect_to user_interviews_path(params[:user_id]), notice: 'Interview was successfully updated.'
+      NotificationMailer.send_reminder_to(@user, current_user).deliver_now unless current_user?(@user)
     else
       render :edit
     end
