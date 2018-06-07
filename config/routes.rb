@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :registrations => :registrations }
   get '/users/me'
   resources :users do
-    resources :interviews, :except => :show
+    resources :interviews, :except => :show do
+      collection do
+        post 'send_request'
+      end
+    end
   end
 
   if Rails.env.development?

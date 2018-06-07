@@ -6,4 +6,9 @@ class NotificationMailer < ApplicationMailer
     @interviewer = interviewer
     mail(subject: '面接時間が確定しました', to: [@applicant.email, @interviewer.email])
   end
+
+  def send_request_to(interviewer:, from:)
+    @applicant = from
+    mail(subject: '面接希望日が決まりました', to: interviewer.email)
+  end
 end

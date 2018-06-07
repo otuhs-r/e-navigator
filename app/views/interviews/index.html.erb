@@ -1,5 +1,5 @@
 <% if current_user?(@user) %>
-  <%= render 'index_for_me', interviews: @interviews %>
+  <%= render 'index_for_me', { interviews: @interviews, users: @users } %>
 <% else %>
   <%= render 'index_for_interviewer', { interviews: @interviews, user: @user } %>
 <% end %>
