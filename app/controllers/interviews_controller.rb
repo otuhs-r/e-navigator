@@ -33,12 +33,12 @@ class InterviewsController < ApplicationController
   end
 
   def update
-    unless current_user?(@user)
-      @user.reject_interviews_except(@interview)
-    end
     if @interview.update(interview_params)
       redirect_to user_interviews_path(params[:user_id]), notice: 'Interview was successfully updated.'
-      NotificationMailer.send_reminder_to(@user, current_user).deliver_now unless current_user?(@user)
+      unless current_user?(@user)
+        @user.reject_interviews_except(@interview)
+        NotificationMailer.send_reminder_to(applicant: @user, interviewer: current_user).deliver_now
+      end
     else
       render :edit
     end
