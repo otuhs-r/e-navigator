@@ -37,7 +37,7 @@ class InterviewsController < ApplicationController
       redirect_to user_interviews_path(params[:user_id]), notice: 'Interview was successfully updated.'
       unless current_user?(@user)
         @user.reject_interviews_except(@interview)
-        NotificationMailer.send_reminder_to(applicant: @user, interviewer: current_user).deliver_now
+        InterviewMailer.remind(applicant: @user, interviewer: current_user).deliver_now
       end
     else
       render :edit
@@ -50,7 +50,7 @@ class InterviewsController < ApplicationController
   end
 
   def send_request
-    NotificationMailer.send_request_to(interviewer: User.find(params[:user]), from: current_user).deliver_now
+    InterviewMailer.request_to(interviewer: User.find(params[:user]), from: current_user).deliver_now
     redirect_to user_interviews_path(current_user.id), notice: 'Request was successfully sent.'
   end
 

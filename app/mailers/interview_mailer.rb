@@ -1,13 +1,13 @@
-class NotificationMailer < ApplicationMailer
+class InterviewMailer < ApplicationMailer
   default from: 'notifications@example.com'
 
-  def send_reminder_to(applicant:, interviewer:)
+  def remind(applicant:, interviewer:)
     @applicant = applicant
     @interviewer = interviewer
     mail(subject: '面接時間が確定しました', to: [@applicant.email, @interviewer.email])
   end
 
-  def send_request_to(interviewer:, from:)
+  def request_to(interviewer:, from:)
     @applicant = from
     mail(subject: '面接希望日が決まりました', to: interviewer.email)
   end
