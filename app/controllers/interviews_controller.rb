@@ -37,7 +37,7 @@ class InterviewsController < ApplicationController
       redirect_to user_interviews_path(params[:user_id]), notice: 'Interview was successfully updated.'
       unless current_user?(@user)
         @user.reject_interviews_except(@interview)
-        InterviewMailer.remind(applicant: @user, interviewer: current_user).deliver_now
+        InterviewMailer.approve(applicant: @user, interviewer: current_user).deliver_now
       end
     else
       render :edit
