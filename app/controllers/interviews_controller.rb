@@ -9,6 +9,7 @@ class InterviewsController < ApplicationController
                   else
                     @user.interviews.where(status: :pending).or(@user.interviews.where(status: :rejected)).order(:scheduled_datetime)
                   end
+    @users = User.where.not(id: current_user.id)
   end
 
   def show
@@ -32,11 +33,12 @@ class InterviewsController < ApplicationController
   end
 
   def update
-    unless current_user?(@user)
-      @user.reject_interviews_except(@interview)
-    end
     if @interview.update(interview_params)
       redirect_to user_interviews_path(params[:user_id]), notice: 'Interview was successfully updated.'
+      unless current_user?(@user)
+        @user.reject_interviews_except(@interview)
+        InterviewMailer.approve(applicant: @user, interviewer: current_user).deliver_now
+      end
     else
       render :edit
     end
@@ -45,6 +47,11 @@ class InterviewsController < ApplicationController
   def destroy
     @interview.destroy
     redirect_to user_interviews_path(current_user.id), notice: 'Interview was successfully destroyed.'
+  end
+
+  def send_request
+    InterviewMailer.request_to(interviewer: User.find(params[:user]), from: current_user).deliver_now
+    redirect_to user_interviews_path(current_user.id), notice: 'Request was successfully sent.'
   end
 
   def current_user?(user)

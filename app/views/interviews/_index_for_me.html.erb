@@ -1,4 +1,20 @@
 <h1>My Interviews</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <%= link_to 'New Interview', new_user_interview_path, class: "btn btn-default" %>
+    </div>
+    <div class="col-lg-4">
+    <%= form_with(url: send_request_user_interviews_path, local: true) do |form| %>
+      <div style="display:inline-flex">
+        <%= form.select :user, users.map { |user| [user.email, user.id] }, {}, { class: "form-control selectpicker show-tick" } %>
+        <%= form.submit "Request", data: { confirm: "Do you send a approval request email?" },  class: "btn btn-success" %>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>
+<br>
 <div class="panel panel-default">
   <table class="table table-striped">
     <thead>
@@ -23,4 +39,3 @@
     </tbody>
   </table>
 </div>
-<%= link_to 'New Interview', new_user_interview_path, class: "btn btn-default" %>
